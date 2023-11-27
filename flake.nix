@@ -88,11 +88,6 @@
           pkgs = import nixpkgs { inherit system; };
           modules = [{
             inherit (nix-config.common.options."${system}-unstable") imports;
-            # imports = [
-            #   ../options/headscale
-            #   ../options/nix
-            #   ../options/ssh
-            # ];
           }];
         };
 
@@ -102,12 +97,6 @@
           pkgs = import nixpkgs { inherit system; };
           modules = [{
             inherit (nix-config.common.options."${system}-unstable") imports;
-
-            # imports = [
-            #   ../options/dockutil
-            #   ../options/headscale
-            #   ../options/nix
-            # ];
           }];
         };
 
