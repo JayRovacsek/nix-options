@@ -4,6 +4,13 @@ This flake exposes an output of `options` which is a naive merge of a number of 
 
 This flake currently follows my own nix-config options and preferences, the hackability of changing it to your own if you are so inclined is not hard at all. Simply expose an array of import targets that you desire to your nix-config output of `common.options.${system}` and change the input of nix-config to your flake reference.
 
+## nixd Features
+
+Take a look at [nixd](https://github.com/nix-community/nixd/blob/main/README.md) to understand _why_ you'd want to use this.
+
+Stealing from nixd's README:
+![options-example](https://github.com/nix-community/nixd/assets/36667224/43e00a8e-c2e6-4598-b188-f5e95d708256)
+
 ## Context Awareness
 
 The default options exposed are nixosConfiguration, darwinConfiguration and homeManagerConfiguration plus any options I personally utilise for my systems. Because these options likely share values to an extent, be aware that while autocomplete might suggest `users.users.<name>.subUidRanges` is valid on a darwin system, it is not - this hint is stemming from the nixos option of the same name.
