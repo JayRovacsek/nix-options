@@ -84,7 +84,6 @@
         # that's going to remain an assumption for now
         nix-stub = let system = "x86_64-linux";
         in nixosSystem {
-          inherit system;
           pkgs = import nixpkgs { inherit system; };
           modules = [{
             inherit (nix-config.common.options."${system}-unstable") imports;
@@ -93,7 +92,6 @@
 
         darwin-stub = let system = "x86_64-darwin";
         in darwinSystem {
-          inherit system;
           pkgs = import nixpkgs { inherit system; };
           modules = [{
             inherit (nix-config.common.options."${system}-unstable") imports;
