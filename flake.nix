@@ -72,17 +72,14 @@
         };
       });
 
-      lib.merge = builtins.foldl' nixpkgs.lib.recursiveUpdate { };
-
       options = let
-        inherit (self.lib) merge;
         inherit (nixpkgs.lib) nixosSystem;
         inherit (nix-darwin.lib) darwinSystem;
         inherit (home-manager.lib) homeManagerConfiguration;
 
         # System differences (options) between arch shouldn't exist, but
         # that's going to remain an assumption for now
-        nix-stub = let system = "x86_64-linux";
+        nixos = let system = "x86_64-linux";
         in nixosSystem {
           pkgs = import nixpkgs { inherit system; };
           modules = [{
@@ -90,7 +87,7 @@
           }];
         };
 
-        darwin-stub = let system = "x86_64-darwin";
+        darwin = let system = "x86_64-darwin";
         in darwinSystem {
           pkgs = import nixpkgs { inherit system; };
           modules = [{
@@ -98,7 +95,7 @@
           }];
         };
 
-        home-manager-stub = let system = "x86_64-linux";
+        hm = let system = "x86_64-linux";
         in homeManagerConfiguration {
           pkgs = import nixpkgs { inherit system; };
           modules = [{
@@ -110,10 +107,12 @@
           }];
         };
 
-      in merge [
-        nix-stub.options
-        darwin-stub.options
-        home-manager-stub.options
-      ];
+      in {
+        # Merged options are not required anymore after this update:
+        # https://github.com/nix-community/vscode-nix-ide/commit/087bd2b70b8c8292a88f4472dd272d56d6bbc6d3
+        darwin = darwin.options;
+        hm = hm.options;
+        nixos = nixos.options;
+      };
     };
 }
