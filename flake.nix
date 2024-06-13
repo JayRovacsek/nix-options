@@ -39,9 +39,18 @@
           src = self;
           hooks = {
             # Builtin hooks
-            deadnix.enable = true;
-            nixfmt.enable = true;
-            prettier.enable = true;
+            deadnix = {
+              enable = true;
+              settings.edit = true;
+            };
+            nixfmt = {
+              enable = true;
+              settings.width = 80;
+            };
+            prettier = {
+              enable = true;
+              settings.write = true;
+            };
             statix.enable = true;
             typos.enable = true;
 
@@ -53,13 +62,6 @@
               language = "system";
               pass_filenames = false;
             };
-          };
-
-          # Settings for builtin hooks, see also: https://github.com/cachix/pre-commit-hooks.nix/blob/master/modules/hooks.nix
-          settings = {
-            deadnix.edit = true;
-            nixfmt.width = 80;
-            prettier.write = true;
           };
         };
       });
@@ -100,7 +102,7 @@
           pkgs = import nixpkgs { inherit system; };
           modules = [{
             home = {
-              stateVersion = "23.11";
+              stateVersion = "24.05";
               username = "stub";
               homeDirectory = "/";
             };
