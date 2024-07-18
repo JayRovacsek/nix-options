@@ -22,10 +22,13 @@ Hopefully the future of this space gives us very context aware suggestions, but 
 To use this within VSCodium or alike editors, add the following to your user's home-manager module for vscodium:
 
 ```nix
-programs.vscode.userSettings."nix.serverSettings" = {
-    nixd.options = {
-        enable = true;
-        target.installable = "${inputs.nix-options}#options";
+programs.vscode.userSettings."nix.serverSettings".nixd = {
+    formatting.command = [ "${pkgs.nixfmt}/bin/nixfmt" ];
+    "options" = {
+    darwin.expr =
+        ''(builtins.getFlake "${nix-options}").options.darwin'';
+    hm.expr = ''(builtins.getFlake "${nix-options}").options.hm'';
+    nixos.expr = ''(builtins.getFlake "${nix-options}").options.nixos'';
     };
 };
 ```

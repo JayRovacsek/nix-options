@@ -14,7 +14,7 @@
       url = "github:lnl7/nix-darwin/master";
     };
 
-    nix-config.url = "github:JayRovacsek/nix-config/update";
+    nix-config.url = "github:JayRovacsek/nix-config";
 
     pre-commit-hooks = {
       inputs.nixpkgs.follows = "nixpkgs";
