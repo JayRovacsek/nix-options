@@ -2,6 +2,11 @@
   description = "Nix option autocompletions for nixd";
 
   inputs = {
+    git-hooks = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:cachix/git-hooks.nix";
+    };
+
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
@@ -9,20 +14,16 @@
 
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
+    nix-config.url = "github:JayRovacsek/nix-config";
+
     nix-darwin = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:lnl7/nix-darwin/master";
     };
-
-    nix-config.url = "github:JayRovacsek/nix-config";
-
-    pre-commit-hooks = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:cachix/pre-commit-hooks.nix";
-    };
   };
 
-  outputs = { self, home-manager, nixpkgs, nix-config, nix-darwin, ... }:
+  outputs =
+    { self, git-hooks, home-manager, nixpkgs, nix-config, nix-darwin, ... }:
     let
       systems =
         [ "aarch64-linux" "x86_64-linux" "aarch64-darwin" "x86_64-darwin" ];
@@ -30,15 +31,11 @@
       forAllSystems = function:
         nixpkgs.lib.genAttrs systems
         (system: function nixpkgs.legacyPackages.${system});
-
     in {
       checks = forAllSystems (pkgs: {
-        default = self.checks.${pkgs.system}.pre-commit;
-
-        pre-commit = self.inputs.pre-commit-hooks.lib.${pkgs.system}.run {
+        default = git-hooks.lib.${pkgs.system}.run {
           src = self;
           hooks = {
-            # Builtin hooks
             deadnix = {
               enable = true;
               settings.edit = true;
@@ -70,7 +67,7 @@
         default = pkgs.mkShell {
           name = "nix-options dev shell";
           packages = with pkgs; [ deadnix nixfmt nodePackages.prettier statix ];
-          inherit (self.checks.${pkgs.system}.pre-commit) shellHook;
+          inherit (self.checks.${pkgs.system}.default) shellHook;
         };
       });
 
