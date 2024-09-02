@@ -1,5 +1,20 @@
 # nix-options
 
+# :warning: Deprecated :warning:
+
+This repo is no longer utilised based on [these changes](https://github.com/JayRovacsek/nix-config/compare/6c895ad8af77925d7971e7514e98f4ff5f4fe17d...3c8fb5fd43be24e0a9db585f8bc455bd9d886b79)
+
+Feel free to utilise this as inspiration if you are
+on a journey of tree-sitter capabilities in nix; but
+do consider looking at the above changeset.
+
+It is a departure from the avoidance of some
+hosts having per-commit unique evaluations, but
+the evaluation time appears to be worthwhile now,
+rather than the cost of yet another nixpkgs input.
+
+# :warning: Deprecated :warning:
+
 This flake exposes an output of `options` which is a naive merge of a number of option values from various nix module sources. It's intended use is for nixd to consume to give auto-suggestions on possible options.
 
 This flake currently follows my own nix-config options and preferences, the hackability of changing it to your own if you are so inclined is not hard at all. Simply expose an array of import targets that you desire to your nix-config output of `common.options.${system}` and change the input of nix-config to your flake reference.
