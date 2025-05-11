@@ -9,7 +9,7 @@
 
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
-    nix-config.url = "github:JayRovacsek/nix-config/testing";
+    nix-config.url = "github:JayRovacsek/nix-config";
   };
 
   outputs =

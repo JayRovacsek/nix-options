@@ -714,16 +714,15 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1746942783,
-        "narHash": "sha256-4GDbPyCIQojhlFfs7D1gsTian8JxT4XNFOyT4HOS4Rs=",
+        "lastModified": 1746943026,
+        "narHash": "sha256-QM4PPZo4ibsywBJe0qLRzHuIZ4/1bdikf6imuXbFkE8=",
         "owner": "JayRovacsek",
         "repo": "nix-config",
-        "rev": "02763006b0921298c4221f83fecbc48f54f8c6ce",
+        "rev": "432a67ebb42f32daf18637bbefe687d0cb4cd554",
         "type": "github"
       },
       "original": {
         "owner": "JayRovacsek",
-        "ref": "testing",
         "repo": "nix-config",
         "type": "github"
       }
