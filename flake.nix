@@ -2,25 +2,18 @@
   description = "Nix option autocompletions for nixd";
 
   inputs = {
-    git-hooks = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:cachix/git-hooks.nix";
-    };
-
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-
     nix-config.url = "github:JayRovacsek/nix-config";
   };
 
   outputs =
     {
       self,
-      git-hooks,
-      nixpkgs,
       nix-config,
       ...
     }:
     let
+      inherit (nix-config.inputs) git-hooks nixpkgs;
+
       systems = [
         "aarch64-linux"
         "x86_64-linux"
